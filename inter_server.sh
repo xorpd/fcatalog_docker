@@ -34,7 +34,7 @@ echo "Server will serve HTTP on port $SERVER_PORT ."
 docker run -it --name  fcatalog_server_cont \
         -p ${SERVER_PORT}:1337 \
 	--volumes-from fcatalog_data_cont \
-        fcatalog_server 
+        fcatalog_server sh -c "/bin/bash"
 
 # Unset abort on failure.
 set +e
