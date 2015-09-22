@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+# Start an interactive session of the fcatalog server.
+# This could be used for debug purposes.
+
+# Abort on failure:
+set -e
+
+# Check if fcatalog_server_cont is running. 
+# If it is running, we abort.
+nlines_server=`docker ps | grep fcatalog_server_cont | wc -l`
+if [ "$nlines_server" -gt "0" ]
+	then echo "fcatalog_server_cont is already running! Aborting." && \
+		exit
+fi
+
+# Check if fcatalog_data_cont exists. If it doesn't exist, we abort.
+nlines_data=`docker ps -a | grep fcatalog_data_cont | wc -l`
+if [ "$nlines_data" -eq "0" ]
+	then echo "Missing fcatalog_data_cont container! Aborting. Please run
+initial_data_cont first." && \
+		exit
+fi
+
+# Get the environment variables from server.conf:
+source server.conf
+
+echo "Server will serve HTTP on port $SERVER_PORT ."
+
+# Get the directories contents by running a new fcatalog_server.
+# We get the volumes from the fcatalog_data_cont container.
+# We also map the configuration file server.conf, and the assets from
+# ./server_image/assets
+docker run -it --name  fcatalog_server_cont \
+        -p ${SERVER_PORT}:1337 \
+	--volumes-from fcatalog_data_cont \
+        fcatalog_server 
+
+# Unset abort on failure.
+set +e
+
