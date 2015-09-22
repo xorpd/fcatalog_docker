@@ -36,7 +36,7 @@ source server.conf
 # We also map the configuration file server.conf, and the assets from
 # ./server_image/assets
 docker run -d --name  fcatalog_server_cont \
-        -p ${SERVER_PORT}:1337 
+        -p ${SERVER_PORT}:1337 \
 	--volumes-from fcatalog_data_cont \
         fcatalog_server 
 
