@@ -16,19 +16,21 @@
 
 # Fill in the FCATALOG_DOCKER_DIR to be the path of fcatalog_docker:
 FCATALOG_DOCKER_DIR=.
+# Fill in a non privileged user that runs the command:
+USER="user"
 
 cd $FCATALOG_DOCKER_DIR
 
 case "$1" in
  start)
-   sudo $FCATALOG_DOCKER_DIR/start_server.sh
+   su $USER -c "$FCATALOG_DOCKER_DIR/start_server"
    ;;
  stop)
-   sudo $FCATALOG_DOCKER_DIR/stop_server.sh
+   su $USER -c "$FCATALOG_DOCKER_DIR/stop_server"
    ;;
  restart)
-   sudo $FCATALOG_DOCKER_DIR/stop_server.sh
-   sudo $FCATALOG_DOCKER_DIR/start_server.sh
+   su $USER -c "$FCATALOG_DOCKER_DIR/stop_server"
+   su $USER -c "$FCATALOG_DOCKER_DIR/start_server"
    ;;
  *)
    echo "Usage: fcatalog_docker {start|stop|restart}" >&2
