@@ -38,7 +38,7 @@ source server.conf
 docker run -d --name  fcatalog_server_cont \
         -p ${SERVER_PORT}:1337 \
 	--volumes-from fcatalog_data_cont \
-        fcatalog_server 
+        fcatalog_server
 
 
 echo "Server serves HTTP on port $SERVER_PORT ."
