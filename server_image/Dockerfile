@@ -15,7 +15,9 @@ RUN \
 		curl \
 		git \
 		supervisor \
-		wget
+		wget \
+		python3
+
 
 # Get fcatalog_server from github:
 RUN git clone https://github.com/xorpd/fcatalog_server.git
