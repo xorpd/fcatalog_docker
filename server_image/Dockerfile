@@ -1,19 +1,21 @@
-FROM ubuntu:14.04.3
+FROM ubuntu:wily
 MAINTAINER xorpd <xorpd@xorpd.net>
 
-# Update packages:
-RUN apt-get update
-RUN apt-get upgrade -qqy
 
 # Create an install directory fcatalog_install, and work from there:
 RUN mkdir -p /fcatalog_install
 WORKDIR /fcatalog_install
 
-# Install supervisor. We need to to run the server.
-RUN apt-get install -y supervisor
 
-# Install git and stuff required for building:
-RUN apt-get install -y git build-essential curl wget
+# Get supervisor:
+RUN \
+	apt-get update && \
+	DEBIAN_FRONTEND=noninteractive apt-get install -y supervisor \
+		build-essential \
+		curl \
+		git \
+		supervisor \
+		wget
 
 # Get fcatalog_server from github:
 RUN git clone https://github.com/xorpd/fcatalog_server.git
