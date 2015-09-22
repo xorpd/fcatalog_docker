@@ -16,7 +16,8 @@ RUN \
 		git \
 		supervisor \
 		wget \
-		python3
+		python3 \
+		sudo
 
 
 # Get fcatalog_server from github:
@@ -32,4 +33,4 @@ RUN ./install
 COPY assets/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 # Start fcatalog_server using supervisor:
-CMD ["usr/bin/supervisord"]
+CMD ["/usr/bin/supervisord"]
