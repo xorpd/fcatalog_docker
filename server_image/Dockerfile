@@ -7,7 +7,7 @@ RUN mkdir -p /fcatalog_install
 WORKDIR /fcatalog_install
 
 
-# Get supervisor:
+# Install required packages:
 RUN \
 	apt-get update && \
 	DEBIAN_FRONTEND=noninteractive apt-get install -y supervisor \
@@ -17,7 +17,8 @@ RUN \
 		supervisor \
 		wget \
 		python3 \
-		sudo
+		sudo \
+		vim
 
 
 # Get fcatalog_server from github:
