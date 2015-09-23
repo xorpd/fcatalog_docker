@@ -5,8 +5,8 @@
 # Abort on failure:
 set -e
 
-docker build -t fcatalog_server ./server_image
-docker build -t fcatalog_data ./data_image
+docker build --no-cache -t fcatalog_server ./server_image
+docker build --no-cache -t fcatalog_data ./data_image
 
 # Unset abort on failure:
 set +e
